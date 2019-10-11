@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: filecounter
+spec:
+  serviceName: filecounter
+  selector:
+    matchLabels:
+      app: filecounter
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: filecounter
+    spec:      
+      containers:
+      - name: filecounter
+        image: "quadient.azurecr.io/cloud/filecounter:demo"
+        volumeMounts:
+        - name: app-data
+          mountPath: /app-data/   
+  volumeClaimTemplates:
+  - metadata:
+      name: app-data
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      storageClassName: azurefile
+      resources:
+        requests:
+          storage: 50Mi
