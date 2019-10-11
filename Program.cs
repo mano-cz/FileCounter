@@ -13,7 +13,7 @@ namespace FileCounter
             var random = new Random();
             while (true)
             {
-                await using var fs = new FileStream(@"counter.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                await using var fs = new FileStream(@"/app-data/counter.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
                 using var sr = new StreamReader(fs);
                 await using var sw = new StreamWriter(fs);
                 var counterValue = await sr.ReadToEndAsync();
