@@ -13,18 +13,7 @@ namespace FileCounter
             var random = new Random();
             while (true)
             {
-                await using var fs = new FileStream(@"/app-data/counter.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
-                using var sr = new StreamReader(fs);
-                await using var sw = new StreamWriter(fs);
-                var counterValue = await sr.ReadToEndAsync();
-                if (!ulong.TryParse(counterValue, out var number))
-                {
-                    Console.WriteLine("Initialization of new counter.");
-                    number = 0;
-                }
-                fs.Seek(0, SeekOrigin.Begin);
-                await sw.WriteLineAsync((++number).ToString());
-                Console.WriteLine(number);
+                await IncreaseCounter();
                 Thread.Sleep(TimeSpan.FromSeconds(1));
                 if (ShouldGenerateCpuSpike(random))
                 {
@@ -32,6 +21,24 @@ namespace FileCounter
                     await GenerateCpuSpikeFor5Sec();
                 }
             }
+        }
+
+        static async Task IncreaseCounter()
+        {
+            await using var fs = new FileStream(@"/app-data/counter.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite,
+                FileShare.ReadWrite);
+            using var sr = new StreamReader(fs);
+            await using var sw = new StreamWriter(fs);
+            var counterValue = await sr.ReadToEndAsync();
+            if (!ulong.TryParse(counterValue, out var number))
+            {
+                Console.WriteLine("Initialization of new counter.");
+                number = 0;
+            }
+
+            fs.Seek(0, SeekOrigin.Begin);
+            await sw.WriteLineAsync((++number).ToString());
+            Console.WriteLine(number);
         }
 
         static bool ShouldGenerateCpuSpike(Random random)
@@ -44,7 +51,7 @@ namespace FileCounter
             var cts = new CancellationTokenSource();
             var cancelToken = cts.Token;
             const int taskCount = 1000;
-            var tasks = new List<Task>(1000);
+            var tasks = new List<Task>(taskCount);
             for (var i = 0; i < taskCount; i++)
             {
                 tasks.Add(Task.Run(() =>
