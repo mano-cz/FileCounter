@@ -2,3 +2,7 @@
 - https://github.com/Microsoft/MIEngine/wiki/Offroad-Debugging-of-.NET-Core-on-Linux---OSX-from-Visual-Studio
 - https://vikaspogu.dev/2019-05-14-debug-netcore-openshift/
 - https://developers.redhat.com/blog/2018/06/13/remotely-debug-asp-net-core-container-pod-on-openshift-with-visual-studio/
+
+Start debugging
+- Open Command Window
+- DebugAdapterHost.Launch /LaunchJson:"c:\Data\SourceCodes\FileCounter\launch.json"
