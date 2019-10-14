@@ -4,5 +4,6 @@
 - https://developers.redhat.com/blog/2018/06/13/remotely-debug-asp-net-core-container-pod-on-openshift-with-visual-studio/
 
 Start debugging
+- oc.exe has to be logged into OpenShift and correct project prior debug session
 - Open Command Window
 - DebugAdapterHost.Launch /LaunchJson:"c:\Data\SourceCodes\FileCounter\launch.json"
