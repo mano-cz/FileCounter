@@ -5,7 +5,7 @@ COPY . .
 
 RUN set -ex; \
     apt-get update && apt-get install -y unzip; \
-	mkdir /vsdbg; \
-	curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
+	mkdir /opt/vsdbg; \
+	curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /opt/vsdbg
 
 CMD ["dotnet", "FileCounter.dll"]

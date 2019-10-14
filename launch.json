@@ -1,7 +1,7 @@
 ﻿{
   "version": "0.2.0",
   "adapter": "c:\\Data\\oc.exe",
-  "adapterArgs": "exec -i filecounter-bcdcb56bf-5zkl9 -- /vsdbg/vsdbg --interpreter=vscode",
+  "adapterArgs": "exec -i filecounter-bcdcb56bf-sc7lz -- /opt/vsdbg/vsdbg --interpreter=vscode",
   "languageMappings": {
     "C#": {
       "languageId": "3F5162F8-07C6-11D3-9053-00C04FA302A1",
